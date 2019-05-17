@@ -1,23 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>vue_demo</title>
 </head>
 <body>
 <div>
+    <!--声明式渲染-->
     <div id="app">
         <p>
             {{message}}
         </p>
     </div>
     <div id="app-2">
-    <span v-bind:title="message">
+    <span v-bind:title="message">         <!-- v-blind:将这个元素节点的 title 特性和 Vue 实例的 message 属性保持一致-->
         鼠标悬停几秒查看此动态绑定的提示信息！
     </span>
     </div>
+    <!--条件与循环-->
     <div id="app-3">
         <p v-if="seen">现在你看到我了</p>
+    </div>
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos"> <!-- v-for 指令可以绑定数组的数据来渲染一个项目列表-->
+                {{todo.text}}
+            </li>
+        </ol>
+    </div>
+    <!--处理用户输入-->
+    <div id="app-5">
+        <p>
+            {{message}}
+            <button v-on:click="reverseMessage">逆转消息</button>
+        </p>
+    </div>
+    <div id="app-6">
+        <p>{{message}}</p>
+        <input v-model="message">
+    </div>
+    <!--组件化应用构建-->
+    <div id="app-7">
+        <ol>
+            <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+            </todo-item>
+        </ol>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -25,24 +55,69 @@
     var app = new Vue({
         el:'#app',
         data: {
-            message: 'Hello Vue!'            /*控制台 >app.message:'***'
-                                                      <"***"    屏幕中message内容更改 */
+            message: '这是个例子'
         }
     });
+    <!--控制台 >app.message:'text' <"text"   屏幕中message内容更改-->
+
+    <!--控制台  >app2.message='hello' <"hello"    悬停鼠标时内容改变-->
     var app2 =new Vue({
         el:'#app-2',
         data: {
-            message: '页面加载于' + new Date().toLocaleString()    /* 控制台  >app2.message='hello'
-                                                                              <"hello"    悬停鼠标时内容改变*/
+            message: '页面加载于' + new Date().toLocaleString()
         }
     });
+    <!--控制台  >app3.seen=false <false  且网页中不显示内容 -->
     var app3 = new Vue({
         el:'#app-3',
         data:{
-            seen:true                                       /*控制台  >app3.seen=false
-                                                                      <false  且网页中不显示内容                                      */
+            seen:true
         }
-    })
+    });
+    <!--  app4.todos.push({ text: '新项目' })   页面添加一行文本 返回项目号4-->
+    var app4 =new Vue({
+        el:'#app-4',
+        data:{
+            todos:[
+                {text:'第一条文本'},
+                {text:'第二条文本'},
+                {text:'第三条文本'}
+            ]
+        }
+    });
+    <!-- 用v-on 指令添加一个事件监听器，通过它调用在 Vue 实例中定义的方法-->
+    var app5 =new Vue({
+        el:'#app-5',
+        data:{
+            message:'这是一条被逆转的消息！how are u，where'
+        },
+        methods:{
+            reverseMessage:function () {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    });
+    <!--Vue 还提供了 v-model 指令，它能轻松实现表单输入和应用状态之间的双向绑定。-->
+    var app6 = new Vue({
+        el:'#app-6',
+        data:{
+            message:'hello vue.js'
+        }
+    });
+    Vue.component('todo-item',{
+        props:['todo'],
+        template:'<li>{{todo.text}}</li>'
+        });
+    var app7 = new Vue({
+        el:'#app-7',
+        data:{
+            groceryList:[
+                {id:0,text:'蔬菜'},
+                {id:1,text:'水果'},
+                {id:2,text:'饮料'}
+            ]
+        }
+    });
 </script>
 </body>
 </html>
