@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue_component</title>
+</head>
+<body>
+<div>
+    <!--父子组件-->
+    <div id="app-8">
+        <parent></parent>
+    </div>
+    <div id="app-9">
+        <p>{{foo}}</p>
+        <!-- 这里的 `foo` 不会更新！ -->
+        <button v-on:click="foo = 'baz'">Change it</button>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var childNode = {
+        template:'<div>被包含的子组件</div>'
+    };
+    var parentNode = {
+        template:'<div>' +
+            '<child></child>' +
+            '<child></child>' +
+            '</div>',
+        components: {
+            child:childNode
+        }};
+    var app8 = new Vue({
+        el: "#app-8",
+        components:{
+            parent:parentNode
+        }
+    });      <!--创建两个组件 parent 和 child。需要保证每个组件可以在相对隔离的环境中书写，这样也能提高组件的可维护性-->
+    <!--使用 Object.freeze()，这会阻止修改现有的属性，也意味着响应系统无法再追踪变化 -->
+    var obj = {
+        foo: 'bar'
+    };
+    Object.freeze(obj);
+    new Vue({
+        el: '#app-9',
+        data: obj
+    });
+
+    var app10 = new Vue({
+        el:'#app-10',
+        data:{
+            a:1
+        },
+        create:function () {
+            // `this` 指向 vm 实例
+            console.log('a is :'+this.a)
+        }
+    });
+</script>
+</body>
+</html>
