@@ -19,6 +19,17 @@
         <p>Original message:"{{message}}"</p>
         <p>Computer reversed message:"{{reversedMessage}}"</p>
     </div>
+    <div id="app-12">
+        <p>{{fullName}}</p>
+    </div>
+    <!--计算属性会依赖于他使用的data中的属性，只要是依赖的属性值有改变，则自动重新调用一下计算属性；
+    如果他所依赖的这些属性值没有发生改变，那么计算属性的值是从缓存中来的，而不是重新编译，那么性能要高一些，所以vue中尽可能使用computed替代watch。-->
+    <div id="app-13">
+        <input type="text" v-model="firstName" />
+        <input type="text" v-model="lastName" />
+        {{fullName}}
+    </div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -74,6 +85,40 @@
             }
         }
     });
+//计算属性computed
+   var app12 = new Vue({
+        el:'#app-12',
+        data:{
+            firstName:'Whiskey',
+            lastName:'Def',
+            fullName:'Whiskey Def'
+        },
+       computed: {
+           fullName:function(){
+               return this.firstName()+' '+this.lastName
+           }
+       }
+    });
+   //利用命令式watch回调
+   var app13 = new Vue({
+        el: '#app-13',
+        data:{
+            firstName: 'hello',
+            lastName: 'vue',
+            fullName: 'hello.ve'
+        },
+        watch: {
+            firstName:function(newval, oldval) {
+                // console.log(newval,oldval);
+                this.fullName = this.firstName + this.lastName;
+            },
+            lastName:function(newval, oldval) {
+                // console.log(newval,oldval);
+                this.fullName = this.firstName + this.lastName;
+            }
+        }
+    });
+
 </script>
 </body>
 </html>
