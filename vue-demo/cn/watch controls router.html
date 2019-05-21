@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch controls router</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <router-link to="/login">登录</router-link>
+    <router-link to="/register/value">注册</router-link>
+    <!--组件的显示占位域-->
+    <router-view></router-view>
+</div>
+
+<script>
+    //1.0 准备组件
+    var App = Vue.extend({});
+
+    var login = Vue.extend({
+        template: '<div><h3>登录</h3></div>'
+    });
+
+    var register = Vue.extend({
+        template: '<div><h3>注册{{name}}</h3></div>',
+        data: function() {
+            return {
+                name: ''
+            }
+        },
+        created: function() {
+            this.name = this.$route.params.name;
+        }
+    });
+
+    //2.0 实例化路由规则对象
+    var router = new VueRouter({
+        routes: [{
+            path: '/login',
+            component: login
+        },
+            {
+                path: '/register/:name',
+                component: register
+            },
+            {
+                path: '/',
+                //当路径为/时，重定向到/login
+                redirect: '/login'
+            }
+        ]
+    });
+
+    //3.0 开启路由对象
+    new Vue({
+        el: '#app',
+        router: router, //开启路由对象
+        watch: {
+            '$route': function(newroute, oldroute) {
+                console.log(newroute, oldroute);
+                //可以在这个函数中获取到当前的路由规则字符串是什么
+                //那么就可以针对一些特定的页面做一些特定的处理
+            }
+        }
+    })
+</script>
+</body>
+</html>
