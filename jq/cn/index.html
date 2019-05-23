@@ -3,27 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>Whiskey def </title>
-    <link rel="stylesheet" href="../../../css/welcom.css" type="text/css">
+    <link rel="stylesheet" href="../css/welcom.css" type="text/css">
     <script type="text/javascript" language="javascript" src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
-    <script src="../../../js/welcome.js" language="JavaScript"></script>
+    <script type="text/javascript" language="JavaScript" src="../js/welcome.js" ></script>
+    <script language="JavaScript">
+        var img = new Array(4);  // 创建数组
+        var nums = 0;
+        if(document.images)
+        {
+            for(i = 1; i <= 4; i++)
+            {
+                img[i] = new Image();  // 创建对象实例
+                img[i].src = "../css/images/00" + i + ".jpg"; // 设置所有图片的路径及名称
+            }
+        }
+        function fort()  // 定义图片切换函数
+        {
+            nums ++;
+            document.images[0].src= img[nums].src;
+            if(nums == 4)
+                nums = 0;
+        }
+        function slide()  // 每隔1秒连续不断的调用fort()函数
+        {
+            setInterval("fort()", 1000);
+        }
+    </script>
 </head>
-<body>
-<div class="play_yinfu" id="audio_btn" style="display:block;z-index:999999;">
-    <div id="yinfu" class="rotate"></div>
-    <audio preload="auto" autoplay="" id="media" src="" autoplay preload loop="loop"></audio>
+<body background="../css/images/pic_bg.jpeg" onload=slide()>
+<div>
+    <div class="play_yinfu" id="audio_btn" style="display:block;z-index:999999;">
+        <div id="yinfu" class="rotate"></div>
+        <audio preload="auto" autoplay="" id="media" src="../css/music/bg.mp3" autoplay preload loop="loop"></audio>
+    </div>
+    <div class="header" align="center">
+        <marquee behavior="alternate" scrollamount="16" width="1100px">
+            welcome to my world~
+        </marquee>
+    </div>
+    <table>
+        <tr>
+            <td>
+                <div id="hi" class="contain_header" >
+                    <div class="contain_produce">welcome to my world!</div>
+                    <p class="p">
+                        Welcome to my small world, where you will see a lot of me, maybe you don't know me,but you will appreciate it immediately, hope you will be happy! If you've finished, you can hide the content by clicking the button below.
+                    </p>
+                    <button class="btnhs" id="buttonhide" onclick="slide_up()">click&nbsp;to&nbsp;hide&nbsp;&nbsp;all</button>
+                </div>
+                <button class="btnhs" id="buttonshow" onclick="show_text()">click to show all</button>
+            </td>
+            <td width="80px"></td>
+            <td>
+                <table width="80%" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><p> </p>
+                            <p><img src="../css/images/001.jpg" alt="" width="800" height="422" align="middle"></p></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div align="right"><a href="pic.html">more</a></div>
 </div>
-<div class="header" align="center">
-    <marquee behavior="alternate" scrollamount="16" width="1100px">
-        welcome to my world~
-    </marquee>
-</div>
-<div id="hi" class="contain_header" >
-    <div class="contain_produce">welcome to my world!</div>
-        <p class="p">
-            Welcome to my small world, where you will see a lot of me, maybe you don't know me,but you will appreciate it immediately, hope you will be happy! If you've finished, you can hide the content by clicking the button below.
-        </p>
-    <button class="btnhs" id="buttonhide" onclick="slide_up()">click&nbsp;to&nbsp;hide&nbsp;&nbsp;all</button>
-</div>
-<button class="btnhs" id="buttonshow" onclick="show_text()">click to show all</button>
 </body>
 </html>

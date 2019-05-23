@@ -5,9 +5,8 @@ html,body
 }
 
 body {
-    background: url("images/pic_bg.jpeg") no-repeat fixed;
+    background: url(images/pic_bg.jpeg) no-repeat fixed initial;
     background-size: cover;
-    background-position: initial;
     background-origin: initial;
     background-clip: initial;
 }

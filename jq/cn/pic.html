@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+    <link rel="stylesheet" href="../css/pro.css" type="text/css">
+    <script>
+        var mt = function(){
+            var receiver = sjr.value;
+            var subject = zt.value;
+            var body = nr.value;
+            var url = "mailto:" + receiver + "?subject=" + subject + "&body=" + body;
+            ss.setAttribute("href", url);
+            ss.click();
+        }
+    </script>
+</head>
+<body background="../css/images/bg.jpg">
+<h1 class="big">个人主页</h1>
+<hr />
+<h3>你想了解我吗?</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;大家好,我是青岛科技大学16级的本科生，我的名字叫Whiskey，很高兴认识你们！</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;在此与大家共勉：<blockquote>天道酬勤</blockquote>
+</p>
+<hr>
+<h3 class="big">我的爱好是什么呢？</h3>
+<p>&nbsp;&nbsp;我的爱好比较广泛，喜欢交朋友、美食，也喜欢各种运动:
+<ul>
+    <li>唱歌</li>
+    <li>跳舞</li>
+    <li>美食</li>
+    <li>旅游</li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;我也喜欢文章，比如：<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;也许每一个男子全都有过这样的两个女人，至少两个。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;娶了红玫瑰，久而久之，红的变了墙上的一抹蚊子血，白的还是“床前明月光”；<br>
+&nbsp;&nbsp;&nbsp;&nbsp;娶了白玫瑰，白的便是衣服上的一粒饭粘子，红的却是心口上的一颗朱砂痣。<br>
+<p align="right">——张爱玲 《红玫瑰与白玫瑰》<br /><br /><hr />
+<h3 class="big">如果你想跟我做朋友的话，填写以下内容吧~</h3>
+<form method="post" action="file.php">
+    <label>姓名：</label>
+    <input type="text"  name="myname" /><br><br>
+    性别:
+    <input type="radio" value="0" name="gender">男
+    <input type="radio" value="1" name="gender">女
+    <br><br>
+    学校：
+    <select>
+        <option value="武汉大学">青岛科技大学</option>
+        <option value="华中科技大学">华中科技大学</option>
+        <option value="中南财经政法大学">中南财经政法大学</option>
+        <option value="湖北省经济与管理学院">湖北省经济与管理学院</option>
+    </select>
+    <br><br>
+    爱好：
+    <select multiple="mulpiple">
+        <option value="网游">网游</option>
+        <option value="唱歌">唱歌</option>
+        <option value="跳舞">跳舞</option>
+        <option value="运动">运动</option>
+        <option value="学习">学习</option>
+        <option value="学习">无</option>
+    </select><br><br>
+    个人介绍：
+    <textarea rows="5" cols="25"></textarea><br />
+</form>
+<div>
+    <input type="text" placeholder="收件人" id="sjr" />
+    <input type="text" placeholder="主题" id="zt" />
+    <textarea placeholder="内容" id="nr"></textarea>
+    <div class="btndiv">
+        <a href="" style="display:none;" id="ss"></a><br>
+        <div>
+            <button onclick="mt()">发送</button>
+        </div>
+    </div>
+<hr />
+</div>
+</body>
+</html>
