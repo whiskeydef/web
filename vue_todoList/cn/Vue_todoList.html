@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>todoList</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="../css/todo.css" type="text/css">
+</head>
+<body>
+<div class="big">
+    <article class="title">todoList</article>
+    <div class="main">
+        <div class="side"></div>
+        <div class="content">
+            <h3>添加任务：</h3>
+            <input placeholder="例如：完成跑步" class="task-input" type="text" v-on:keyup.enter="enterFn" v-model="todo" />
+            <ul class="taskinfo">
+                <li>{{unComplete}}个任务未完成</li><br>
+                <li>
+                    <a :class="{active:visibility!=='unCompleted'&&visibility!=='completed'}" href="#all">所有任务</a>
+                    <a :class="{active:visibility==='unCompleted'}" href="#unCompleted">未完成的任务</a>
+                    <a :class="{active:visibility==='completed'}" href="#completed">完成的任务</a>
+                </li>
+            </ul>
+            <h3>任务列表：</h3>
+            <div class="tasks">
+                <span class="taskinfo" v-show="!list.length">还没有添加任何任务</span>
+                <ul v-show="list.length">
+                    <li v-for="item in filterData" v-bind:class="{completed:item.isComplete,editing:item===editorTodos}">
+                        <div>
+                            <input class="point" type="checkbox" v-model="item.isComplete"/>
+                            <label @dblclick="editorTodo(item)">{{item.title}}</label>
+                            <button @click="delFn(item)">×</button>
+                        </div>
+                        <input type="text" v-focus="editorTodos===item" v-model="item.title" @blur="editoEnd(item)" @keyup.enter="editoEnd(item)" @keyup.esc="cancelEdit(item)"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="side"></div>
+    </div>
+</div>
+<script src="../js/todoList.js"></script>
+</body>
+</html>

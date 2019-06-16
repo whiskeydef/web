@@ -2,18 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>watch controls router</title>
+    <title>login</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
-<div id="app">
-    <router-link to="/login">登录</router-link>
-    <router-link to="/register/value">注册</router-link>
-    <!--组件的显示占位域-->
-    <router-view></router-view>
+<div class="big" align="center">
+    <div class="main">
+        <div align="center">
+            <table>
+                <tr>
+                    <td>username</td>
+                    <td><input type="text" v-model="userName" placeholder="username"></td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td><input type="password" v-model="password" placeholder="password"></td>
+                </tr>
+            </table>
+        </div><br>
+        <div id="app" align="center">
+            <button @click.native="login" type="primary" round :loading="isBtnLoading">
+                <router-link to="/login">登录</router-link>
+            </button>
+            <button><router-link to="/register/value">注册</router-link></button>
+            <!--组件的显示占位域-->
+            <router-view></router-view>
+        </div>
+    </div>
 </div>
-
 <script>
     //1.0 准备组件
     var App = Vue.extend({});
@@ -38,7 +55,7 @@
     var router = new VueRouter({
         routes: [{
             path: '/login',
-            component: login
+            component: vue_watch_router
         },
             {
                 path: '/register/:name',

@@ -12,8 +12,8 @@
             {{message}}
         </p>
     </div>
-    <div id="app-2">
-    <span v-bind:title="message">         <!-- v-blind:将这个元素节点的 title 特性和 Vue 实例的 message 属性保持一致-->
+    <div id="app-2">                <!--v-bind用于设置HTML属性  属性绑定   v-bind:可以缩写为:  -->
+    <span v-bind:title="message">   <!-- 属性绑定 v-blind:将这个元素节点的 title 特性和 Vue 实例的 message 属性保持一致-->
         鼠标悬停几秒查看此动态绑定的提示信息！
     </span>
     </div>
@@ -23,7 +23,7 @@
     </div>
     <div id="app-4">
         <ol>
-            <li v-for="todo in todos"> <!-- v-for 指令可以绑定数组的数据来渲染一个项目列表-->
+            <li v-for="todo in todos">      <!-- v-for 指令可以绑定数组的数据来渲染一个项目列表-->
                 {{todo.text}}
             </li>
         </ol>
@@ -32,9 +32,10 @@
     <div id="app-5">
         <p>
             {{message}}
-            <button v-on:click="reverseMessage">逆转消息</button>
+            <button v-on:click="reverseMessage">逆转消息</button>    <!--v-on用于捆绑HTML事件-->
         </p>
     </div>
+    <!--双向绑定v-modle: -->
     <div id="app-6">
         <p>{{message}}</p>
         <input v-model="message">
@@ -49,6 +50,9 @@
             </todo-item>
         </ol>
     </div>
+    <div id="app-8" v-on:click="handleClick">{{msg}}</div>
+    <div id="app-9" @click="change">{{msg}}</div> <!-- 事件绑定 v-on:click简写为@click  -->
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
@@ -118,6 +122,28 @@
             ]
         }
     });
+    var app8 = new Vue({
+        el:"#app-8",
+        data:{
+            msg:"hello"
+        },
+        methods: {
+            handleClick: function(){
+                alert("world")
+            }
+        }
+    });
+    var app9 =new Vue({
+        el:"#app-9",
+        data:{
+            msg:"world"
+        },
+        methods:{
+            change:function () {
+                this.msg ="hello"
+            }
+        }
+    })
 </script>
 </body>
 </html>

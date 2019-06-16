@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accordion</title>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <collapse>
+        <collapse-item title="react">内容1</collapse-item>
+        <collapse-item title="vue">内容2</collapse-item>
+        <collapse-item title="nodejs">内容2</collapse-item>
+    </collapse>
+</div>
+<script src="../js/accordion.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app'
+    });
+</script>
+
+</body>
+</html>
